@@ -23,12 +23,13 @@ try:
         temp_df = df.copy()
         cur_stat = STATUS[i % 5]
         cur_sword_type = SWORD_TYPES[i // 5]
-        temp_df['Status(状态)'] = cur_stat
-        temp_df['Type(刀种)'] = cur_sword_type
+        temp_df['Status'] = cur_stat
+        temp_df['Type'] = cur_sword_type
         updated_list.append(temp_df)
 
     all_sword_stats = pd.concat(updated_list, ignore_index = True) #join all lists
-    all_sword_stats = all_sword_stats[all_sword_stats['Name'] != 'Name'] # clean up headers
+    all_sword_stats = all_sword_stats[all_sword_stats['Name'] != 'Name'] # clean up redundant headers
+    all_sword_stats.columns = all_sword_stats.columns.str.replace(" ", "", regex = False) # clean up header name
     print(all_sword_stats.columns)
     all_sword_stats.to_csv("tkrb_stats_test.csv", index = False) # save
     print("data saved to tkrb_stats_test.csv")
