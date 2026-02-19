@@ -18,10 +18,14 @@ def get_actual_stats(character, level):
         'Scouting(偵察)': 0.02,
         'Camouflage(隠蔽)': 0.02,
     }
+    LEVEL_FIX = 0.1
     
     for stat, coeff in STATS_FIX.items():
         base_val = float(character[stat])
-        actual_stats[stat] = int(base_val * (level * coeff + 1))
+        if level >= 100:
+            actual_stats[stat] = int(base_val * (100 * coeff + (level - 100) * coeff * LEVEL_FIX + 1))
+        else:
+            actual_stats[stat] = int(base_val * (level * coeff + 1))
 
     return actual_stats
 
