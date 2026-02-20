@@ -7,6 +7,7 @@ def get_actual_stats(character, level):
         'Status': character['Status'],
         'Type': character['Type'],
         'Survival(生存)': character['Survival(生存)'],
+        'Level': level,
     }
 
     STATS_FIX = {
